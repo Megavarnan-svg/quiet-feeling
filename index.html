@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>For You 💝</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Us 💝</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+/* =========================
+   BASE THEME (unchanged, refined)
+========================= */
 :root{
-  --bg:#faf7f9;
+  --bg: linear-gradient(135deg,#faf7f9,#fff);
   --card:#ffffff;
   --text:#222;
   --muted:#666;
@@ -23,74 +27,88 @@ body{
   min-height:100vh;
   background:var(--bg);
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   font-family:'Inter',sans-serif;
   color:var(--text);
 }
 
 .app{
   width:92%;
-  max-width:480px;
+  max-width:520px;
   background:var(--card);
   border-radius:30px;
-  padding:38px 32px;
-  box-shadow:0 40px 80px rgba(0,0,0,.12);
-  text-align:center;
+  padding:36px 32px;
+  box-shadow:0 40px 90px rgba(0,0,0,.12);
   overflow:hidden;
 }
 
-/* ---------- ENVELOPE ---------- */
+/* =========================
+   ANIMATIONS (dopamine, subtle)
+========================= */
+.fade{animation:fade .8s ease}
+.zoom{animation:zoom 1s ease}
+.glow{animation:glow 1.2s ease}
+.wave{animation:wave 1s ease}
 
-.envelope{
-  position:relative;
-  width:200px;
-  height:130px;
-  margin:0 auto 20px;
-  background:#ffd6e6;
-  border-radius:14px;
-  cursor:pointer;
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+@keyframes zoom{
+  from{opacity:0;transform:scale(.95)}
+  to{opacity:1;transform:scale(1)}
+}
+@keyframes glow{
+  0%{box-shadow:0 0 0 rgba(255,92,154,0)}
+  100%{box-shadow:0 0 30px rgba(255,92,154,.25)}
+}
+@keyframes wave{
+  from{letter-spacing:0}
+  to{letter-spacing:1px}
 }
 
-.envelope:before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:#ffb6d5;
-  clip-path:polygon(0 0,100% 0,50% 55%);
-}
-
-.scissors{
-  font-size:32px;
-  margin-top:14px;
-  animation:pulse 1.6s infinite;
-}
-
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.15)}
-}
-
-/* ---------- TEXT ---------- */
-
+/* =========================
+   CONTENT
+========================= */
 h1{
   font-family:'Playfair Display',serif;
-  margin-bottom:16px;
+  font-size:26px;
+  text-align:center;
+  margin-bottom:18px;
 }
-
 p{
   font-size:15px;
   line-height:1.8;
   color:var(--muted);
+  text-align:center;
 }
 
-button{
+.card{
   margin-top:20px;
-  padding:14px 22px;
+  padding:26px;
+  border-radius:24px;
+  border:2px solid #f2f2f2;
+}
+
+.option{
+  margin-top:12px;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid #eee;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.option:hover{
+  background:#fafafa;
+}
+
+.continue{
+  margin-top:22px;
+  padding:14px;
   border:none;
+  width:100%;
   border-radius:18px;
   background:var(--accent);
   color:white;
@@ -98,33 +116,10 @@ button{
   cursor:pointer;
 }
 
-/* ---------- QUESTIONS ---------- */
-
-.option{
-  width:100%;
-  margin-top:12px;
-  padding:14px;
-  border-radius:16px;
-  border:1px solid #eee;
-  background:white;
-  cursor:pointer;
-}
-
-/* ---------- FADE ---------- */
-
-.fade-in{
-  animation:fade .8s ease;
-}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
 input{
   width:100%;
-  padding:14px;
   margin-top:14px;
+  padding:14px;
   border-radius:14px;
   border:1px solid #ddd;
 }
@@ -132,118 +127,186 @@ input{
 </head>
 
 <body>
-
-<div class="app" id="app">
-
-  <!-- STEP 1: ENVELOPE -->
-  <div id="step1" class="fade-in">
-    <div class="envelope" onclick="openEnvelope()"></div>
-    <div class="scissors">✂️</div>
-    <p>Cut here to open</p>
-  </div>
-
-</div>
+<div class="app" id="app"></div>
 
 <script>
-const app = document.getElementById("app");
-
-/* ---------- STEP 2: LETTER ---------- */
-function openEnvelope(){
-  app.innerHTML = `
-    <div class="fade-in">
-      <h1>Hey You 🤍</h1>
-      <p>
-        I didn’t know how to say this directly,
-        so I built it instead.<br><br>
-        Take this slowly.
-        Read honestly.
-        And don’t overthink.<br><br>
-        Ready?
-      </p>
-      <button onclick="startQuiz()">Let’s go</button>
-    </div>
-  `;
+/* =========================
+   LOVE JOURNEY DATA
+========================= */
+const journey = [
+{
+q:"Do you remember how you felt when I first proposed?",
+o:["My heart knew ❤️","I smiled before answering 😊","I felt safe instantly 🫶"],
+btn:"Shall we open the first memory? 💫",
+anim:"fade"
+},
+{
+q:"Our first date still feels like…",
+o:["A warm blur ✨","Perfectly imperfect 🌙","Like it just happened 💕"],
+btn:"One step closer to us…",
+anim:"zoom"
+},
+{
+q:"Our favorite food together tastes like…",
+o:["Comfort 🍲","Laughs 🍕","Us 🍝"],
+btn:"Hungry for another memory?",
+anim:"glow"
+},
+{
+q:"That first hug felt like…",
+o:["Relief 🤍","Belonging 🫂","Home starting 🏡"],
+btn:"Hold this feeling… then continue",
+anim:"fade"
+},
+{
+q:"Our first kiss was…",
+o:["Soft and nervous 💋","Magical ✨","Unforgettable ❤️"],
+btn:"Your heart remembers more…",
+anim:"zoom"
+},
+{
+q:"I make you feel safest when I…",
+o:["Listen quietly 👂","Stay present 🤍","Choose you daily 🌱"],
+btn:"Let’s go deeper…",
+anim:"wave"
+},
+{
+q:"One habit of mine you secretly love?",
+o:["My voice 🗣️","How I care 🫶","My silly side 😄"],
+btn:"Smile and continue",
+anim:"fade"
+},
+{
+q:"A moment you’ll never forget with me?",
+o:["A look 👀","A silence 🌌","A laugh 😂"],
+btn:"Another memory is waiting…",
+anim:"zoom"
+},
+{
+q:"With me, ‘home’ feels like…",
+o:["Peace 🕊️","Warmth 🔥","Belonging 🤍"],
+btn:"Stay… just one more",
+anim:"glow"
+},
+{
+q:"If we relived one memory?",
+o:["Our beginning 🌸","A quiet night 🌙","A long hug 🫂"],
+btn:"Time bends for love…",
+anim:"fade"
+},
+{
+q:"When we fought but stayed, you felt…",
+o:["Stronger 💪","Seen 👀","Certain ❤️"],
+btn:"Your heart knows this",
+anim:"zoom"
+},
+{
+q:"You miss me most when…",
+o:["It’s quiet 🌃","You’re tired 💤","You’re happy 😊"],
+btn:"Miss me a little more?",
+anim:"wave"
+},
+{
+q:"Growing old with me looks like…",
+o:["Laugh lines 😊","Slow mornings ☕","Forever 🤍"],
+btn:"Picture the future…",
+anim:"fade"
+},
+{
+q:"If the world ended tomorrow?",
+o:["I’d hold you 🫂","I’d laugh with you 😂","I’d stay ❤️"],
+btn:"Nothing else matters now",
+anim:"zoom"
+},
+{
+q:"One word for our love?",
+o:["Safe 🕊️","Deep 🌊","True 💎"],
+btn:"Almost there…",
+anim:"glow"
+},
+{
+q:"Our comfort food together?",
+o:["Street food 🌮","Midnight snacks 🍜","Anything shared 🍽️"],
+btn:"Warm memories ahead",
+anim:"fade"
+},
+{
+q:"That tight hug made you feel…",
+o:["Protected 🫶","Wanted ❤️","Calm 🌿"],
+btn:"Breathe… then continue",
+anim:"zoom"
+},
+{
+q:"If we went back in time…",
+o:["I’d still choose you 🤍","Again and again 🔁","Without doubt ❤️"],
+btn:"Your answer matters",
+anim:"wave"
+},
+{
+q:"A promise you want forever?",
+o:["Honesty 🤝","Choosing each other 🌱","Never leaving 🫂"],
+btn:"One last question…",
+anim:"fade"
+},
+{
+q:"Which Tamil song would you perform with me at our wedding?",
+o:["Vaseegara","Munbe Vaa","Maruvaarthai","Hosanna"],
+btn:"Unlock what this all meant 💝",
+anim:"zoom"
 }
-
-/* ---------- QUIZ ---------- */
-
-const quiz = [
-  {
-    q:"If you had to choose one…",
-    o:["Chocolate 🍫","Me","Why would you ask this"]
-  },
-  {
-    q:"Do you remember our first kiss?",
-    o:["Every detail","Enough to smile","I act cool"]
-  },
-  {
-    q:"When my name pops up on your phone…",
-    o:["You smile","You check twice","You pretend nothing"]
-  },
-  {
-    q:"Love feels more like…",
-    o:["Comfort","Safety","Home"]
-  }
 ];
 
-let index=0;
+let step=0;
 
-function startQuiz(){
-  renderQuestion();
-}
-
-function renderQuestion(){
-  const q = quiz[index];
-  app.innerHTML = `
-    <div class="fade-in">
-      <h1>${q.q}</h1>
-      ${q.o.map(opt=>`<div class="option" onclick="next()">${opt}</div>`).join("")}
+/* =========================
+   RENDER
+========================= */
+function render(){
+  const j=journey[step];
+  app.innerHTML=`
+    <h1 class="${j.anim}">${j.q}</h1>
+    <div class="card ${j.anim}">
+      ${j.o.map(x=>`<div class="option">${x}</div>`).join("")}
     </div>
+    <button class="continue" onclick="next()">${j.btn}</button>
   `;
 }
-
 function next(){
-  index++;
-  if(index<quiz.length) renderQuestion();
+  step++;
+  if(step<journey.length) render();
   else lock();
 }
 
-/* ---------- LOCK ---------- */
-
+/* =========================
+   SECRET
+========================= */
 function lock(){
   app.innerHTML=`
-    <div class="fade-in">
-      <h1>One last thing 🔒</h1>
-      <p>This part is only for you.</p>
-      <input type="password" id="pass" placeholder="Password">
-      <button onclick="unlock()">Unlock</button>
-      <p id="err"></p>
-    </div>
+    <h1 class="fade">For You 🔒</h1>
+    <p>This part opens only if you know the truth.</p>
+    <input id="pass" placeholder="Password">
+    <button class="continue" onclick="unlock()">Reveal</button>
+    <p id="err"></p>
   `;
 }
-
 function unlock(){
-  const password = "onlyyou"; // 🔐 CHANGE THIS
-  const input = document.getElementById("pass").value;
-
-  if(input===password){
+  if(document.getElementById("pass").value==="kiss me"){
     app.innerHTML=`
-      <div class="fade-in">
-        <h1>💝</h1>
-        <p>
-          This wasn’t a website.<br><br>
-          It was me choosing you —
-          quietly, intentionally,
-          and completely.<br><br>
-          I hope you felt that.
-        </p>
-      </div>
+      <h1 class="zoom">💝</h1>
+      <p>
+        This wasn’t a quiz.<br><br>
+        It was a journey through us —<br>
+        every memory, every choice,<br>
+        every quiet moment that made me choose you.<br><br>
+        Always.
+      </p>
     `;
   }else{
     document.getElementById("err").innerText="That’s not it 🤍";
   }
 }
-</script>
 
+render();
+</script>
 </body>
 </html>
