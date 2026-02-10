@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <title>Quiet Feeling</title>
 
 <style>
-/* ===== DO NOT CHANGE STYLES (as requested) ===== */
-
 * {
   box-sizing: border-box;
   font-family: 'Georgia', serif;
@@ -86,109 +83,46 @@ input {
 
 <div class="app fade" id="app"></div>
 
-<!-- FINAL SONG -->
-<audio id="finalSong">
-  <source src="oru-paathi.mp3" type="audio/mpeg">
+<!-- SINGLE BACKGROUND SONG -->
+<audio id="finalSong" loop>
+  <source src="tamil-love.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* ===== QUESTIONS DATA ===== */
-
 const questions = [
-  {
-    q: "When I first proposed, how did your heart react?",
-    a: ["It skipped 💓", "It felt safe 🤍", "It smiled quietly 😊"]
-  },
-  {
-    q: "Our first date still smells like…",
-    a: ["That place 🍽️", "Your perfume 🌸", "That nervous laugh 😌"]
-  },
-  {
-    q: "Our favorite food together feels like…",
-    a: ["Comfort 🍜", "Us 🍕", "Home 🏠"]
-  },
-  {
-    q: "That first hug was…",
-    a: ["Warm 🤗", "Long 💞", "Everything 💖"]
-  },
-  {
-    q: "Our first kiss felt like…",
-    a: ["Fire 🔥", "Calm 🌙", "Forever 💋"]
-  },
-  {
-    q: "I make you feel safest when…",
-    a: ["I listen 🤍", "I hold you 🤗", "I stay 🫶"]
-  },
-  {
-    q: "One habit of mine you secretly love?",
-    a: ["My care 🧠", "My silliness 😄", "My patience 🕊️"]
-  },
-  {
-    q: "A moment you’ll never forget?",
-    a: ["That look 👀", "That talk 🌌", "That silence 🤍"]
-  },
-  {
-    q: "With me, home feels like…",
-    a: ["Peace 🏡", "Warmth 🔥", "Belonging 💞"]
-  },
-  {
-    q: "If we relive one memory?",
-    a: ["That night 🌙", "That laugh 😂", "That hug 🤗"]
-  },
-  {
-    q: "When we fought but stayed, you felt…",
-    a: ["Stronger 💪", "Closer 🫂", "Certain 🤍"]
-  },
-  {
-    q: "You miss me most when…",
-    a: ["It’s quiet 🌧️", "You smile alone 😊", "You need me 🫶"]
-  },
-  {
-    q: "Growing old with me feels like…",
-    a: ["Laughing 👵👴", "Holding hands 🤍", "Still choosing 💍"]
-  },
-  {
-    q: "If the world ended tomorrow?",
-    a: ["Stay with me 🌍", "Laugh once more 😂", "Hold tight 🤍"]
-  },
-  {
-    q: "One word for us?",
-    a: ["Always ♾️", "Us 💞", "Home 🏡"]
-  },
-  {
-    q: "Our comfort food together?",
-    a: ["Shared bites 🍰", "Late nights 🍜", "Simple joy ☕"]
-  },
-  {
-    q: "That tight hug felt like…",
-    a: ["Relief 😌", "Love 💗", "Forever ♾️"]
-  },
-  {
-    q: "If time rewinds, you’d still choose me?",
-    a: ["Every time 🤍", "Without doubt 💍", "Again & again ♾️"]
-  },
-  {
-    q: "A promise you want forever?",
-    a: ["Honesty 🕊️", "Stay 🤍", "Us 💞"]
-  },
-  {
-    q: "Are you ready for something just ours?",
-    a: ["Yes 💝", "I feel it 🤍"]
-  }
+  { q: "When I first proposed, how did your heart react?", a: ["It skipped 💓", "It felt safe 🤍", "It smiled quietly 😊"] },
+  { q: "Our first date still smells like…", a: ["That place 🍽️", "Your perfume 🌸", "That nervous laugh 😌"] },
+  { q: "Our favorite food together feels like…", a: ["Comfort 🍜", "Us 🍕", "Home 🏠"] },
+  { q: "That first hug was…", a: ["Warm 🤗", "Long 💞", "Everything 💖"] },
+  { q: "Our first kiss felt like…", a: ["Fire 🔥", "Calm 🌙", "Forever 💋"] },
+  { q: "I make you feel safest when…", a: ["I listen 🤍", "I hold you 🤗", "I stay 🫶"] },
+  { q: "One habit of mine you secretly love?", a: ["My care 🧠", "My silliness 😄", "My patience 🕊️"] },
+  { q: "A moment you’ll never forget?", a: ["That look 👀", "That talk 🌌", "That silence 🤍"] },
+  { q: "With me, home feels like…", a: ["Peace 🏡", "Warmth 🔥", "Belonging 💞"] },
+  { q: "If we relive one memory?", a: ["That night 🌙", "That laugh 😂", "That hug 🤗"] },
+  { q: "When we fought but stayed, you felt…", a: ["Stronger 💪", "Closer 🫂", "Certain 🤍"] },
+  { q: "You miss me most when…", a: ["It’s quiet 🌧️", "You smile alone 😊", "You need me 🫶"] },
+  { q: "Growing old with me feels like…", a: ["Laughing 👵👴", "Holding hands 🤍", "Still choosing 💍"] },
+  { q: "If the world ended tomorrow?", a: ["Stay with me 🌍", "Laugh once more 😂", "Hold tight 🤍"] },
+  { q: "One word for us?", a: ["Always ♾️", "Us 💞", "Home 🏡"] },
+  { q: "Our comfort food together?", a: ["Shared bites 🍰", "Late nights 🍜", "Simple joy ☕"] },
+  { q: "That tight hug felt like…", a: ["Relief 😌", "Love 💗", "Forever ♾️"] },
+  { q: "If time rewinds, you’d still choose me?", a: ["Every time 🤍", "Without doubt 💍", "Again & again ♾️"] },
+  { q: "A promise you want forever?", a: ["Honesty 🕊️", "Stay 🤍", "Us 💞"] },
+  { q: "Are you ready for something just ours?", a: ["Yes 💝", "I feel it 🤍"] }
 ];
 
 let index = 0;
 const app = document.getElementById("app");
-
-/* ===== RENDER QUESTION ===== */
+const finalSong = document.getElementById("finalSong");
 
 function renderQuestion() {
-  const current = questions[index];
+  const c = questions[index];
   app.innerHTML = `
     <div class="fade">
-      <h1>${current.q}</h1>
+      <h1>${c.q}</h1>
       <div class="options">
-        ${current.a.map(opt => `<button onclick="next()">${opt}</button>`).join("")}
+        ${c.a.map(opt => `<button onclick="next()">${opt}</button>`).join("")}
       </div>
       <button onclick="next()">Shall we open the next memory? 💫</button>
     </div>
@@ -204,8 +138,6 @@ function next() {
   }
 }
 
-/* ===== PASSWORD SCREEN ===== */
-
 function showPassword() {
   app.innerHTML = `
     <div class="fade">
@@ -217,16 +149,11 @@ function showPassword() {
   `;
 }
 
-/* ===== SECRET REVEAL (SONG AFTER 40s) ===== */
-
-const finalSong = document.getElementById("finalSong");
-
 function unlockSecret() {
   const input = document.getElementById("password").value.trim().toLowerCase();
 
   if (input === "kiss me") {
 
-    // Secret message appears immediately
     app.innerHTML = `
       <div class="fade">
         <h1>💝</h1>
@@ -237,14 +164,24 @@ function unlockSecret() {
           I choose you —<br>
           softly, completely, always.
         </p>
+
+        <p style="margin-top:20px;font-size:12px;color:#999;">
+          built with 🤍 —
+          <a href="https://megavarnan-svg.github.io/quiet-feeling/"
+             target="_blank"
+             style="color:#999;text-decoration:none;">
+             open again anytime
+          </a>
+        </p>
       </div>
     `;
 
-    // Song starts AFTER 40 seconds
-    setTimeout(() => {
-      finalSong.volume = 0;
-      finalSong.play();
+    // unlock audio on user interaction
+    finalSong.volume = 0;
+    finalSong.play().catch(() => {});
 
+    // wait 40 seconds, then fade in
+    setTimeout(() => {
       let fadeIn = setInterval(() => {
         if (finalSong.volume < 0.5) {
           finalSong.volume += 0.02;
@@ -252,7 +189,6 @@ function unlockSecret() {
           clearInterval(fadeIn);
         }
       }, 200);
-
     }, 40000);
 
   } else {
@@ -260,7 +196,6 @@ function unlockSecret() {
   }
 }
 
-/* ===== START ===== */
 renderQuestion();
 </script>
 
