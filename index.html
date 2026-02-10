@@ -1,312 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Us 💝</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Quiet Feeling</title>
 
 <style>
-/* =========================
-   BASE THEME (unchanged, refined)
-========================= */
-:root{
-  --bg: linear-gradient(135deg,#faf7f9,#fff);
-  --card:#ffffff;
-  --text:#222;
-  --muted:#666;
-  --accent:#ff5c9a;
+/* ===== DO NOT CHANGE STYLES (as requested) ===== */
+
+* {
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
 }
 
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  min-height:100vh;
-  background:var(--bg);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:'Inter',sans-serif;
-  color:var(--text);
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd6e8, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.app{
-  width:92%;
-  max-width:520px;
-  background:var(--card);
-  border-radius:30px;
-  padding:36px 32px;
-  box-shadow:0 40px 90px rgba(0,0,0,.12);
-  overflow:hidden;
+.app {
+  width: 90%;
+  max-width: 420px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-/* =========================
-   ANIMATIONS (dopamine, subtle)
-========================= */
-.fade{animation:fade .8s ease}
-.zoom{animation:zoom 1s ease}
-.glow{animation:glow 1.2s ease}
-.wave{animation:wave 1s ease}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:none}
-}
-@keyframes zoom{
-  from{opacity:0;transform:scale(.95)}
-  to{opacity:1;transform:scale(1)}
-}
-@keyframes glow{
-  0%{box-shadow:0 0 0 rgba(255,92,154,0)}
-  100%{box-shadow:0 0 30px rgba(255,92,154,.25)}
-}
-@keyframes wave{
-  from{letter-spacing:0}
-  to{letter-spacing:1px}
+h1 {
+  font-size: 24px;
+  margin-bottom: 15px;
 }
 
-/* =========================
-   CONTENT
-========================= */
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:26px;
-  text-align:center;
-  margin-bottom:18px;
-}
-p{
-  font-size:15px;
-  line-height:1.8;
-  color:var(--muted);
-  text-align:center;
+p {
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-.card{
-  margin-top:20px;
-  padding:26px;
-  border-radius:24px;
-  border:2px solid #f2f2f2;
+button {
+  margin-top: 20px;
+  padding: 14px 22px;
+  border-radius: 30px;
+  border: none;
+  background: #ff5c9a;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.option{
-  margin-top:12px;
-  padding:14px;
-  border-radius:16px;
-  border:1px solid #eee;
-  cursor:pointer;
-  font-size:14px;
+.options button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  background: #ffe6f0;
+  color: #333;
 }
 
-.option:hover{
-  background:#fafafa;
+.fade {
+  animation: fadeIn 1.2s ease;
 }
 
-.continue{
-  margin-top:22px;
-  padding:14px;
-  border:none;
-  width:100%;
-  border-radius:18px;
-  background:var(--accent);
-  color:white;
-  font-size:14px;
-  cursor:pointer;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-input{
-  width:100%;
-  margin-top:14px;
-  padding:14px;
-  border-radius:14px;
-  border:1px solid #ddd;
+input {
+  padding: 12px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  width: 80%;
+  font-size: 15px;
+  margin-top: 15px;
 }
 </style>
 </head>
 
 <body>
-<div class="app" id="app"></div>
+
+<div class="app fade" id="app"></div>
+
+<!-- FINAL SONG -->
+<audio id="finalSong">
+  <source src="oru-paathi.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-/* =========================
-   LOVE JOURNEY DATA
-========================= */
-const journey = [
-{
-q:"Do you remember how you felt when I first proposed?",
-o:["My heart knew ❤️","I smiled before answering 😊","I felt safe instantly 🫶"],
-btn:"Shall we open the first memory? 💫",
-anim:"fade"
-},
-{
-q:"Our first date still feels like…",
-o:["A warm blur ✨","Perfectly imperfect 🌙","Like it just happened 💕"],
-btn:"One step closer to us…",
-anim:"zoom"
-},
-{
-q:"Our favorite food together tastes like…",
-o:["Comfort 🍲","Laughs 🍕","Us 🍝"],
-btn:"Hungry for another memory?",
-anim:"glow"
-},
-{
-q:"That first hug felt like…",
-o:["Relief 🤍","Belonging 🫂","Home starting 🏡"],
-btn:"Hold this feeling… then continue",
-anim:"fade"
-},
-{
-q:"Our first kiss was…",
-o:["Soft and nervous 💋","Magical ✨","Unforgettable ❤️"],
-btn:"Your heart remembers more…",
-anim:"zoom"
-},
-{
-q:"I make you feel safest when I…",
-o:["Listen quietly 👂","Stay present 🤍","Choose you daily 🌱"],
-btn:"Let’s go deeper…",
-anim:"wave"
-},
-{
-q:"One habit of mine you secretly love?",
-o:["My voice 🗣️","How I care 🫶","My silly side 😄"],
-btn:"Smile and continue",
-anim:"fade"
-},
-{
-q:"A moment you’ll never forget with me?",
-o:["A look 👀","A silence 🌌","A laugh 😂"],
-btn:"Another memory is waiting…",
-anim:"zoom"
-},
-{
-q:"With me, ‘home’ feels like…",
-o:["Peace 🕊️","Warmth 🔥","Belonging 🤍"],
-btn:"Stay… just one more",
-anim:"glow"
-},
-{
-q:"If we relived one memory?",
-o:["Our beginning 🌸","A quiet night 🌙","A long hug 🫂"],
-btn:"Time bends for love…",
-anim:"fade"
-},
-{
-q:"When we fought but stayed, you felt…",
-o:["Stronger 💪","Seen 👀","Certain ❤️"],
-btn:"Your heart knows this",
-anim:"zoom"
-},
-{
-q:"You miss me most when…",
-o:["It’s quiet 🌃","You’re tired 💤","You’re happy 😊"],
-btn:"Miss me a little more?",
-anim:"wave"
-},
-{
-q:"Growing old with me looks like…",
-o:["Laugh lines 😊","Slow mornings ☕","Forever 🤍"],
-btn:"Picture the future…",
-anim:"fade"
-},
-{
-q:"If the world ended tomorrow?",
-o:["I’d hold you 🫂","I’d laugh with you 😂","I’d stay ❤️"],
-btn:"Nothing else matters now",
-anim:"zoom"
-},
-{
-q:"One word for our love?",
-o:["Safe 🕊️","Deep 🌊","True 💎"],
-btn:"Almost there…",
-anim:"glow"
-},
-{
-q:"Our comfort food together?",
-o:["Street food 🌮","Midnight snacks 🍜","Anything shared 🍽️"],
-btn:"Warm memories ahead",
-anim:"fade"
-},
-{
-q:"That tight hug made you feel…",
-o:["Protected 🫶","Wanted ❤️","Calm 🌿"],
-btn:"Breathe… then continue",
-anim:"zoom"
-},
-{
-q:"If we went back in time…",
-o:["I’d still choose you 🤍","Again and again 🔁","Without doubt ❤️"],
-btn:"Your answer matters",
-anim:"wave"
-},
-{
-q:"A promise you want forever?",
-o:["Honesty 🤝","Choosing each other 🌱","Never leaving 🫂"],
-btn:"One last question…",
-anim:"fade"
-},
-{
-q:"Which Tamil song would you perform with me at our wedding?",
-o:["Vaseegara","Munbe Vaa","Maruvaarthai","Hosanna"],
-btn:"Unlock what this all meant 💝",
-anim:"zoom"
-}
+/* ===== QUESTIONS DATA ===== */
+
+const questions = [
+  {
+    q: "When I first proposed, how did your heart react?",
+    a: ["It skipped 💓", "It felt safe 🤍", "It smiled quietly 😊"]
+  },
+  {
+    q: "Our first date still smells like…",
+    a: ["That place 🍽️", "Your perfume 🌸", "That nervous laugh 😌"]
+  },
+  {
+    q: "Our favorite food together feels like…",
+    a: ["Comfort 🍜", "Us 🍕", "Home 🏠"]
+  },
+  {
+    q: "That first hug was…",
+    a: ["Warm 🤗", "Long 💞", "Everything 💖"]
+  },
+  {
+    q: "Our first kiss felt like…",
+    a: ["Fire 🔥", "Calm 🌙", "Forever 💋"]
+  },
+  {
+    q: "I make you feel safest when…",
+    a: ["I listen 🤍", "I hold you 🤗", "I stay 🫶"]
+  },
+  {
+    q: "One habit of mine you secretly love?",
+    a: ["My care 🧠", "My silliness 😄", "My patience 🕊️"]
+  },
+  {
+    q: "A moment you’ll never forget?",
+    a: ["That look 👀", "That talk 🌌", "That silence 🤍"]
+  },
+  {
+    q: "With me, home feels like…",
+    a: ["Peace 🏡", "Warmth 🔥", "Belonging 💞"]
+  },
+  {
+    q: "If we relive one memory?",
+    a: ["That night 🌙", "That laugh 😂", "That hug 🤗"]
+  },
+  {
+    q: "When we fought but stayed, you felt…",
+    a: ["Stronger 💪", "Closer 🫂", "Certain 🤍"]
+  },
+  {
+    q: "You miss me most when…",
+    a: ["It’s quiet 🌧️", "You smile alone 😊", "You need me 🫶"]
+  },
+  {
+    q: "Growing old with me feels like…",
+    a: ["Laughing 👵👴", "Holding hands 🤍", "Still choosing 💍"]
+  },
+  {
+    q: "If the world ended tomorrow?",
+    a: ["Stay with me 🌍", "Laugh once more 😂", "Hold tight 🤍"]
+  },
+  {
+    q: "One word for us?",
+    a: ["Always ♾️", "Us 💞", "Home 🏡"]
+  },
+  {
+    q: "Our comfort food together?",
+    a: ["Shared bites 🍰", "Late nights 🍜", "Simple joy ☕"]
+  },
+  {
+    q: "That tight hug felt like…",
+    a: ["Relief 😌", "Love 💗", "Forever ♾️"]
+  },
+  {
+    q: "If time rewinds, you’d still choose me?",
+    a: ["Every time 🤍", "Without doubt 💍", "Again & again ♾️"]
+  },
+  {
+    q: "A promise you want forever?",
+    a: ["Honesty 🕊️", "Stay 🤍", "Us 💞"]
+  },
+  {
+    q: "Are you ready for something just ours?",
+    a: ["Yes 💝", "I feel it 🤍"]
+  }
 ];
 
-let step=0;
+let index = 0;
+const app = document.getElementById("app");
 
-/* =========================
-   RENDER
-========================= */
-function render(){
-  const j=journey[step];
-  app.innerHTML=`
-    <h1 class="${j.anim}">${j.q}</h1>
-    <div class="card ${j.anim}">
-      ${j.o.map(x=>`<div class="option">${x}</div>`).join("")}
+/* ===== RENDER QUESTION ===== */
+
+function renderQuestion() {
+  const current = questions[index];
+  app.innerHTML = `
+    <div class="fade">
+      <h1>${current.q}</h1>
+      <div class="options">
+        ${current.a.map(opt => `<button onclick="next()">${opt}</button>`).join("")}
+      </div>
+      <button onclick="next()">Shall we open the next memory? 💫</button>
     </div>
-    <button class="continue" onclick="next()">${j.btn}</button>
   `;
-}
-function next(){
-  step++;
-  if(step<journey.length) render();
-  else lock();
 }
 
-/* =========================
-   SECRET
-========================= */
-function lock(){
-  app.innerHTML=`
-    <h1 class="fade">For You 🔒</h1>
-    <p>This part opens only if you know the truth.</p>
-    <input id="pass" placeholder="Password">
-    <button class="continue" onclick="unlock()">Reveal</button>
-    <p id="err"></p>
-  `;
-}
-function unlock(){
-  if(document.getElementById("pass").value==="kiss me"){
-    app.innerHTML=`
-      <h1 class="zoom">💝</h1>
-      <p>
-        This wasn’t a quiz.<br><br>
-        It was a journey through us —<br>
-        every memory, every choice,<br>
-        every quiet moment that made me choose you.<br><br>
-        Always.
-      </p>
-    `;
-  }else{
-    document.getElementById("err").innerText="That’s not it 🤍";
+function next() {
+  index++;
+  if (index < questions.length) {
+    renderQuestion();
+  } else {
+    showPassword();
   }
 }
 
-render();
+/* ===== PASSWORD SCREEN ===== */
+
+function showPassword() {
+  app.innerHTML = `
+    <div class="fade">
+      <h1>🔐 One last thing</h1>
+      <p>This part opens only if you know our word.</p>
+      <input id="password" placeholder="enter it softly…" />
+      <button onclick="unlockSecret()">Open my heart 💗</button>
+    </div>
+  `;
+}
+
+/* ===== SECRET REVEAL (SONG AFTER 40s) ===== */
+
+const finalSong = document.getElementById("finalSong");
+
+function unlockSecret() {
+  const input = document.getElementById("password").value.trim().toLowerCase();
+
+  if (input === "kiss me") {
+
+    // Secret message appears immediately
+    app.innerHTML = `
+      <div class="fade">
+        <h1>💝</h1>
+        <p>
+          This wasn’t a quiz.<br><br>
+          It was every quiet feeling<br>
+          I never knew how to say.<br><br>
+          I choose you —<br>
+          softly, completely, always.
+        </p>
+      </div>
+    `;
+
+    // Song starts AFTER 40 seconds
+    setTimeout(() => {
+      finalSong.volume = 0;
+      finalSong.play();
+
+      let fadeIn = setInterval(() => {
+        if (finalSong.volume < 0.5) {
+          finalSong.volume += 0.02;
+        } else {
+          clearInterval(fadeIn);
+        }
+      }, 200);
+
+    }, 40000);
+
+  } else {
+    alert("Hmm… that doesn’t feel like our word 🤍");
+  }
+}
+
+/* ===== START ===== */
+renderQuestion();
 </script>
+
 </body>
 </html>
