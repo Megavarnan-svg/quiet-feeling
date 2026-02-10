@@ -1,174 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Just Us 💝</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For You 💝</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #fff0f6, #ffffff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
+:root{
+  --bg:#faf7f9;
+  --card:#ffffff;
+  --text:#222;
+  --muted:#666;
+  --accent:#ff5c9a;
 }
 
-/* Floating hearts + chocolates */
-.float {
-  position: absolute;
-  font-size: 20px;
-  animation: rise 7s linear infinite;
-  opacity: 0.5;
-}
-@keyframes rise {
-  from { transform: translateY(110vh); }
-  to { transform: translateY(-10vh); }
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Inter',sans-serif;
+  color:var(--text);
 }
 
-.card {
-  background: rgba(255,255,255,0.96);
-  width: 92%;
-  max-width: 440px;
-  border-radius: 30px;
-  padding: 32px 28px;
-  text-align: center;
-  box-shadow: 0 40px 80px rgba(255,105,180,0.25);
-  animation: fade 0.8s ease;
+.app{
+  width:92%;
+  max-width:480px;
+  background:var(--card);
+  border-radius:30px;
+  padding:38px 32px;
+  box-shadow:0 40px 80px rgba(0,0,0,.12);
+  text-align:center;
+  overflow:hidden;
 }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ---------- ENVELOPE ---------- */
+
+.envelope{
+  position:relative;
+  width:200px;
+  height:130px;
+  margin:0 auto 20px;
+  background:#ffd6e6;
+  border-radius:14px;
+  cursor:pointer;
 }
 
-.teddy {
-  font-size: 60px;
-  margin-bottom: 6px;
+.envelope:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#ffb6d5;
+  clip-path:polygon(0 0,100% 0,50% 55%);
 }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  color: #ff4f9a;
-  margin: 6px 0 14px;
+.scissors{
+  font-size:32px;
+  margin-top:14px;
+  animation:pulse 1.6s infinite;
 }
 
-#question {
-  font-size: 15px;
-  color: #555;
-  min-height: 70px;
-  line-height: 1.6;
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
 }
 
-.btn {
-  width: 100%;
-  padding: 14px;
-  margin-top: 12px;
-  border-radius: 18px;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.25s ease;
+/* ---------- TEXT ---------- */
+
+h1{
+  font-family:'Playfair Display',serif;
+  margin-bottom:16px;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
+p{
+  font-size:15px;
+  line-height:1.8;
+  color:var(--muted);
 }
 
-.yes {
-  background: linear-gradient(135deg, #ff6aa2, #ff9ac8);
-  color: white;
+button{
+  margin-top:20px;
+  padding:14px 22px;
+  border:none;
+  border-radius:18px;
+  background:var(--accent);
+  color:white;
+  font-size:14px;
+  cursor:pointer;
 }
 
-.maybe {
-  background: #fff;
-  border: 1px solid #ffc1dc;
-  color: #ff4f9a;
+/* ---------- QUESTIONS ---------- */
+
+.option{
+  width:100%;
+  margin-top:12px;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid #eee;
+  background:white;
+  cursor:pointer;
 }
 
-.no {
-  background: #ffe1ef;
-  color: #ff4f9a;
+/* ---------- FADE ---------- */
+
+.fade-in{
+  animation:fade .8s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-top:14px;
+  border-radius:14px;
+  border:1px solid #ddd;
 }
 </style>
 </head>
 
 <body>
 
-<script>
-const icons = ["💗","🤍","🍫","🧸"];
-for(let i=0;i<20;i++){
-  const f=document.createElement("div");
-  f.className="float";
-  f.innerText=icons[Math.floor(Math.random()*icons.length)];
-  f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=5+Math.random()*5+"s";
-  document.body.appendChild(f);
-}
-</script>
+<div class="app" id="app">
 
-<div class="card" id="card">
-  <div class="teddy">🧸🍫</div>
-  <h1>Just Us</h1>
-  <div id="question">Let’s be honest… softly.</div>
+  <!-- STEP 1: ENVELOPE -->
+  <div id="step1" class="fade-in">
+    <div class="envelope" onclick="openEnvelope()"></div>
+    <div class="scissors">✂️</div>
+    <p>Cut here to open</p>
+  </div>
 
-  <button class="btn yes" onclick="answer(3)">Obviously you 💖</button>
-  <button class="btn maybe" onclick="answer(2)">Depends on the moment 😌</button>
-  <button class="btn no" onclick="answer(1)">Don’t expose me like this 😭</button>
 </div>
 
 <script>
+const app = document.getElementById("app");
+
+/* ---------- STEP 2: LETTER ---------- */
+function openEnvelope(){
+  app.innerHTML = `
+    <div class="fade-in">
+      <h1>Hey You 🤍</h1>
+      <p>
+        I didn’t know how to say this directly,
+        so I built it instead.<br><br>
+        Take this slowly.
+        Read honestly.
+        And don’t overthink.<br><br>
+        Ready?
+      </p>
+      <button onclick="startQuiz()">Let’s go</button>
+    </div>
+  `;
+}
+
+/* ---------- QUIZ ---------- */
+
 const quiz = [
-  "If you had to choose one — chocolate 🍫 or me?",
-  "Do you remember our first kiss… or are you pretending you don’t?",
-  "Would you still choose me on days I’m annoying?",
-  "Do you smile when my name pops up?",
-  "If I stole your hoodie, would you secretly like it?",
-  "Would you rather spend a quiet night together than a loud party?",
-  "Do you believe love is built in small moments?",
-  "Have you ever missed me without saying it?",
-  "If I was sad, would you notice without me telling you?",
-  "Be honest… are you a little attached already?"
+  {
+    q:"If you had to choose one…",
+    o:["Chocolate 🍫","Me","Why would you ask this"]
+  },
+  {
+    q:"Do you remember our first kiss?",
+    o:["Every detail","Enough to smile","I act cool"]
+  },
+  {
+    q:"When my name pops up on your phone…",
+    o:["You smile","You check twice","You pretend nothing"]
+  },
+  {
+    q:"Love feels more like…",
+    o:["Comfort","Safety","Home"]
+  }
 ];
 
-let index = 0;
-let score = 0;
+let index=0;
 
-function answer(val){
-  score += val;
+function startQuiz(){
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = quiz[index];
+  app.innerHTML = `
+    <div class="fade-in">
+      <h1>${q.q}</h1>
+      ${q.o.map(opt=>`<div class="option" onclick="next()">${opt}</div>`).join("")}
+    </div>
+  `;
+}
+
+function next(){
   index++;
+  if(index<quiz.length) renderQuestion();
+  else lock();
+}
 
-  const q = document.getElementById("question");
+/* ---------- LOCK ---------- */
 
-  if(index < quiz.length){
-    q.innerText = quiz[index];
-  } else {
-    let msg = "";
+function lock(){
+  app.innerHTML=`
+    <div class="fade-in">
+      <h1>One last thing 🔒</h1>
+      <p>This part is only for you.</p>
+      <input type="password" id="pass" placeholder="Password">
+      <button onclick="unlock()">Unlock</button>
+      <p id="err"></p>
+    </div>
+  `;
+}
 
-    if(score >= 26){
-      msg = "You don’t love loudly — you love deeply. And that’s dangerous in the best way.";
-    } else if(score >= 19){
-      msg = "You care more than you admit. Your heart just likes to play cool.";
-    } else {
-      msg = "You’re cautious… but someone could still melt you.";
-    }
+function unlock(){
+  const password = "onlyyou"; // 🔐 CHANGE THIS
+  const input = document.getElementById("pass").value;
 
-    document.getElementById("card").innerHTML = `
-      <div class="teddy">🧸💝</div>
-      <h1>One Last Thing</h1>
-      <p style="font-size:15px;color:#555;line-height:1.7;">
-        ${msg}<br><br>
-        This wasn’t a quiz.<br>
-        It was a love letter disguised as questions.
-      </p>
+  if(input===password){
+    app.innerHTML=`
+      <div class="fade-in">
+        <h1>💝</h1>
+        <p>
+          This wasn’t a website.<br><br>
+          It was me choosing you —
+          quietly, intentionally,
+          and completely.<br><br>
+          I hope you felt that.
+        </p>
+      </div>
     `;
+  }else{
+    document.getElementById("err").innerText="That’s not it 🤍";
   }
 }
 </script>
