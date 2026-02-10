@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Quiet Feelings</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: #0f0f0f;
+  color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 90%;
+  max-width: 420px;
+  background: #141414;
+  border-radius: 18px;
+  padding: 36px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  animation: fadeIn 1s ease;
+}
+
+h1 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 28px;
+  opacity: 0.9;
+}
+
+.question {
+  font-size: 1rem;
+  margin-bottom: 26px;
+  min-height: 52px;
+}
+
+.option {
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.option:hover {
+  background: #1f1f1f;
+}
+
+.result {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Quiet Feelings</h1>
+  <div class="question" id="question"></div>
+  <div id="options"></div>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const secret = params.get("secret");
+
+const quiz = [
+  {
+    q: "When they cross your mind, what remains?",
+    options: [
+      { t: "Stillness", s: 3 },
+      { t: "A brief pause", s: 2 },
+      { t: "Nothing measurable", s: 1 }
+    ]
+  },
+  {
+    q: "Distance from them would feel like…",
+    options: [
+      { t: "A quiet loss", s: 3 },
+      { t: "A small shift", s: 2 },
+      { t: "No real change", s: 1 }
+    ]
+  },
+  {
+    q: "You see their name appear.",
+    options: [
+      { t: "You hesitate before opening", s: 3 },
+      { t: "You open without thought", s: 2 },
+      { t: "You let it pass", s: 1 }
+    ]
+  },
+  {
+    q: "Silence between you feels…",
+    options: [
+      { t: "Heavy but meaningful", s: 3 },
+      { t: "Uncertain", s: 2 },
+      { t: "Comfortable or empty", s: 1 }
+    ]
+  },
+  {
+    q: "When something good happens, you think of…",
+    options: [
+      { t: "Telling them first", s: 3 },
+      { t: "Maybe mentioning it", s: 2 },
+      { t: "Keeping it to yourself", s: 1 }
+    ]
+  },
+  {
+    q: "If they slowly faded away…",
+    options: [
+      { t: "You’d feel it for a long time", s: 3 },
+      { t: "You’d adjust eventually", s: 2 },
+      { t: "You’d barely notice", s: 1 }
+    ]
+  }
+];
+
+let step = 0;
+let score = 0;
+
+const qEl = document.getElementById("question");
+const oEl = document.getElementById("options");
+const rEl = document.getElementById("result");
+
+function typeText(el, text, speed = 28) {
+  el.textContent = "";
+  let i = 0;
+  const interval = setInterval(() => {
+    el.textContent += text.charAt(i);
+    i++;
+    if (i >= text.length) clearInterval(interval);
+  }, speed);
+}
+
+function load() {
+  typeText(qEl, quiz[step].q);
+  oEl.innerHTML = "";
+
+  quiz[step].options.forEach(opt => {
+    const div = document.createElement("div");
+    div.className = "option";
+    div.textContent = opt.t;
+    div.onclick = () => {
+      score += opt.s;
+      step++;
+      step < quiz.length ? load() : showResult();
+    };
+    oEl.appendChild(div);
+  });
+}
+
+function showResult() {
+  qEl.textContent = "";
+  oEl.innerHTML = "";
+
+  let text = "";
+
+  if (secret) {
+    text = `This page exists because someone wanted you to see it.
+Not loudly. Not publicly.
+Just honestly.`;
+  } else if (score >= 15) {
+    text = "This is attachment. Quiet. Intentional. Hard to replace.";
+  } else if (score >= 10) {
+    text = "Something is forming — undefined, but not accidental.";
+  } else {
+    text = "This is familiarity, not feeling. And that clarity matters.";
+  }
+
+  rEl.textContent = text;
+}
+
+load();
+</script>
+
+</body>
+</html>
