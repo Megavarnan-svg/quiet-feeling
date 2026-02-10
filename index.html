@@ -1,88 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Love.exe 💖</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Us 💝</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  height: 100vh;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffe6f0, #ffffff);
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff0f6, #ffffff);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
 
-/* Floating hearts */
-.heart {
+/* Floating hearts + chocolates */
+.float {
   position: absolute;
-  font-size: 18px;
-  animation: floatUp 6s linear infinite;
-  opacity: 0.6;
+  font-size: 20px;
+  animation: rise 7s linear infinite;
+  opacity: 0.5;
 }
-@keyframes floatUp {
-  from { transform: translateY(100vh); }
+@keyframes rise {
+  from { transform: translateY(110vh); }
   to { transform: translateY(-10vh); }
 }
 
 .card {
-  width: 90%;
-  max-width: 420px;
-  background: rgba(255,255,255,0.95);
-  border-radius: 26px;
-  padding: 28px;
+  background: rgba(255,255,255,0.96);
+  width: 92%;
+  max-width: 440px;
+  border-radius: 30px;
+  padding: 32px 28px;
   text-align: center;
-  box-shadow: 0 30px 60px rgba(255,105,180,0.25);
-  animation: fadeIn 0.8s ease;
+  box-shadow: 0 40px 80px rgba(255,105,180,0.25);
+  animation: fade 0.8s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
+@keyframes fade {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .teddy {
-  font-size: 56px;
+  font-size: 60px;
   margin-bottom: 6px;
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
   color: #ff4f9a;
-  margin: 8px 0 14px;
+  margin: 6px 0 14px;
 }
 
 #question {
   font-size: 15px;
   color: #555;
-  min-height: 60px;
+  min-height: 70px;
+  line-height: 1.6;
 }
 
 .btn {
   width: 100%;
   padding: 14px;
   margin-top: 12px;
-  border-radius: 16px;
+  border-radius: 18px;
   border: none;
   font-size: 14px;
   cursor: pointer;
-  transition: 0.25s ease;
+  transition: all 0.25s ease;
 }
-
-.yes { background: #ff7eb3; color: white; }
-.no { background: #ffd6e8; color: #ff4f9a; }
-.maybe { background: #ffffff; border: 1px solid #ffb6d5; color: #ff4f9a; }
 
 .btn:hover {
   transform: translateY(-2px);
+}
+
+.yes {
+  background: linear-gradient(135deg, #ff6aa2, #ff9ac8);
+  color: white;
+}
+
+.maybe {
+  background: #fff;
+  border: 1px solid #ffc1dc;
+  color: #ff4f9a;
+}
+
+.no {
+  background: #ffe1ef;
+  color: #ff4f9a;
 }
 </style>
 </head>
@@ -90,38 +103,39 @@ h1 {
 <body>
 
 <script>
-for(let i=0;i<18;i++){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerText=Math.random()>0.5?"💗":"🤍";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=4+Math.random()*4+"s";
-  document.body.appendChild(h);
+const icons = ["💗","🤍","🍫","🧸"];
+for(let i=0;i<20;i++){
+  const f=document.createElement("div");
+  f.className="float";
+  f.innerText=icons[Math.floor(Math.random()*icons.length)];
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=5+Math.random()*5+"s";
+  document.body.appendChild(f);
 }
 </script>
 
 <div class="card" id="card">
-  <div class="teddy">🧸</div>
-  <h1>Love.exe</h1>
-  <div id="question">Ready to answer honestly?</div>
+  <div class="teddy">🧸🍫</div>
+  <h1>Just Us</h1>
+  <div id="question">Let’s be honest… softly.</div>
 
-  <button class="btn yes" onclick="answer(2)">Yes 💗</button>
-  <button class="btn maybe" onclick="answer(3)">It’s complicated 😌</button>
-  <button class="btn no" onclick="answer(1)">No 🤍</button>
+  <button class="btn yes" onclick="answer(3)">Obviously you 💖</button>
+  <button class="btn maybe" onclick="answer(2)">Depends on the moment 😌</button>
+  <button class="btn no" onclick="answer(1)">Don’t expose me like this 😭</button>
 </div>
 
 <script>
 const quiz = [
-  "Do you act normal even when someone affects you deeply?",
-  "Have you ever reread a message just to feel something?",
-  "Do you believe effort matters more than words?",
-  "Would you rather be chosen quietly than loudly?",
-  "Do you notice details others usually miss?",
-  "Have you ever caught feelings by accident?",
-  "Is comfort more attractive than excitement?",
-  "Do you stay even when things get boring?",
-  "Do you pretend you don’t care more than you should?",
-  "Are you hoping someone understands this about you?"
+  "If you had to choose one — chocolate 🍫 or me?",
+  "Do you remember our first kiss… or are you pretending you don’t?",
+  "Would you still choose me on days I’m annoying?",
+  "Do you smile when my name pops up?",
+  "If I stole your hoodie, would you secretly like it?",
+  "Would you rather spend a quiet night together than a loud party?",
+  "Do you believe love is built in small moments?",
+  "Have you ever missed me without saying it?",
+  "If I was sad, would you notice without me telling you?",
+  "Be honest… are you a little attached already?"
 ];
 
 let index = 0;
@@ -136,23 +150,23 @@ function answer(val){
   if(index < quiz.length){
     q.innerText = quiz[index];
   } else {
-    let result = "";
+    let msg = "";
 
-    if(score >= 25){
-      result = "You feel deeply, quietly, and honestly. That’s rare.";
-    } else if(score >= 18){
-      result = "You’re emotionally aware, even if you hide it well.";
+    if(score >= 26){
+      msg = "You don’t love loudly — you love deeply. And that’s dangerous in the best way.";
+    } else if(score >= 19){
+      msg = "You care more than you admit. Your heart just likes to play cool.";
     } else {
-      result = "You protect yourself — and that’s okay too.";
+      msg = "You’re cautious… but someone could still melt you.";
     }
 
     document.getElementById("card").innerHTML = `
-      <div class="teddy">🧸</div>
-      <h1>Result 💞</h1>
-      <p style="font-size:15px;color:#555;line-height:1.6;">
-        ${result}<br><br>
-        This wasn’t really a test.<br>
-        It was a mirror.
+      <div class="teddy">🧸💝</div>
+      <h1>One Last Thing</h1>
+      <p style="font-size:15px;color:#555;line-height:1.7;">
+        ${msg}<br><br>
+        This wasn’t a quiz.<br>
+        It was a love letter disguised as questions.
       </p>
     `;
   }
